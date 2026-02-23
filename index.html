@@ -55,18 +55,18 @@ body{background:var(--bg);color:var(--tx);font-family:var(--f);line-height:1.55}
 
 .ws{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:.55rem}
 
-.wt-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
-.wt-card{width:170px;min-width:155px;border-radius:12px;padding:22px 10px 12px;position:relative;text-align:center;flex:0 0 auto}
-.wt-ripple{position:absolute;top:0;left:0;right:0;height:22px;overflow:hidden;opacity:.3;border-radius:11px 11px 0 0}
-.wt-day{font-size:.78rem;font-weight:700}
-.wt-date{font-size:.6rem;color:#64748b;margin-bottom:2px}
-.wt-badge{display:inline-block;font-size:.48rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-radius:4px;padding:2px 8px;margin-bottom:6px}
-.wt-sites{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.45);border-radius:6px;padding:6px 4px;border:1px solid rgba(0,0,0,.04)}
-.wt-site{text-align:center;padding:2px 2px}
-.wt-site-label{font-size:.45rem;color:#64748b;font-weight:700;letter-spacing:.03em}
-.wt-site-val{font-size:.95rem;font-weight:700;font-family:var(--m)}
-.wt-site-f{font-size:.42rem;color:#94a3b8}
-.wt-fish{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:6px 0 0;min-height:56px}
+.wt-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:.55rem}
+.wt-card{border-radius:8px;padding:.85rem .6rem 0.6rem;position:relative;text-align:center;transition:border-color .2s,box-shadow .2s}
+.wt-ripple{position:absolute;top:0;left:0;right:0;height:16px;overflow:hidden;opacity:.25;border-radius:7px 7px 0 0}
+.wt-day{font-size:.8rem;font-weight:600}
+.wt-date{font-size:.7rem;color:#64748b;margin-bottom:.2rem}
+.wt-badge{display:inline-block;font-size:.42rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:3px;padding:1px 6px;margin-bottom:.35rem}
+.wt-sites{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.45);border-radius:5px;padding:4px 2px;border:1px solid rgba(0,0,0,.04)}
+.wt-site{text-align:center;padding:1px 1px}
+.wt-site-label{font-size:.4rem;color:#64748b;font-weight:700;letter-spacing:.03em}
+.wt-site-val{font-size:.82rem;font-weight:700;font-family:var(--m)}
+.wt-site-f{font-size:.38rem;color:#94a3b8}
+.wt-fish{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:4px 0 0;min-height:44px}
 .wt-legend{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
 .wt-legend span{font-size:.55rem;font-weight:600;padding:2px 7px;border-radius:4px}
 .wx-card{background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:.85rem .6rem;text-align:center;transition:border-color .2s,box-shadow .2s}
@@ -133,7 +133,7 @@ tr:hover td{background:#f0f5fa}
     <span style="background:#fef2f2;color:#b91c1c;border:1px solid #b91c1c20">&#x26A0; 27&deg;C+ Critical</span>
   </div>
   <div class="wt-strip">
-        <div class="wt-card" style="background:#ecfeff;border:2px solid #06b6d4;box-shadow:0 8px 20px -4px #06b6d435;">
+        <div class="wt-card" style="background:#ecfeff;border:1.5px solid #06b6d4;box-shadow:0 2px 8px rgba(0,0,0,.08);">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#06b6d4"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -154,7 +154,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">40&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a5f3fc" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"><animate attributeName="d" dur="7.0s" begin="0.0s" repeatCount="indefinite"
             values="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27;
@@ -172,7 +172,7 @@ tr:hover td{background:#f0f5fa}
         <path d="M26,20 Q30,27 26,34" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.2"/>
         <path d="M8,27 L17,27" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.2"/></g>
       
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -190,7 +190,7 @@ tr:hover td{background:#f0f5fa}
     </svg></div>
           </div>
         </div>
-        <div class="wt-card" style="background:#ecfeff;border:1.5px solid #06b6d440;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04);">
+        <div class="wt-card" style="background:#ecfeff;border:1px solid #06b6d440;box-shadow:none;">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#06b6d4"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -202,7 +202,7 @@ tr:hover td{background:#f0f5fa}
             <div class="wt-sites">
               <div class="wt-site" style="border-right:1px solid rgba(0,0,0,0.08)">
                 <div class="wt-site-label">MOUTH</div>
-                <div class="wt-site-val" style="color:#0e7490">6.7&deg;C</div>
+                <div class="wt-site-val" style="color:#0e7490">6.8&deg;C</div>
                 <div class="wt-site-f">44&deg;F</div>
               </div>
               <div class="wt-site">
@@ -211,7 +211,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">43&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a5f3fc" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"><animate attributeName="d" dur="7.0s" begin="0.0s" repeatCount="indefinite"
             values="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27;
@@ -229,7 +229,7 @@ tr:hover td{background:#f0f5fa}
         <path d="M26,20 Q30,27 26,34" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.2"/>
         <path d="M8,27 L17,27" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.2"/></g>
       
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a5f3fc" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"><animate attributeName="d" dur="7.0s" begin="0.4s" repeatCount="indefinite"
             values="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27;
@@ -250,7 +250,7 @@ tr:hover td{background:#f0f5fa}
     </svg></div>
           </div>
         </div>
-        <div class="wt-card" style="background:#e0f2fe;border:1.5px solid #0284c740;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04);">
+        <div class="wt-card" style="background:#e0f2fe;border:1px solid #0284c740;box-shadow:none;">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#0284c7"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -271,7 +271,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">37&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -286,7 +286,7 @@ tr:hover td{background:#f0f5fa}
       <g><line x1="30" y1="40" x2="30" y2="47" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="50" y1="38" x2="50" y2="46" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="70" y1="37" x2="70" y2="43" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/></g>
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -304,7 +304,7 @@ tr:hover td{background:#f0f5fa}
     </svg></div>
           </div>
         </div>
-        <div class="wt-card" style="background:#e0f2fe;border:1.5px solid #0284c740;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04);">
+        <div class="wt-card" style="background:#e0f2fe;border:1px solid #0284c740;box-shadow:none;">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#0284c7"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -325,7 +325,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">37&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -340,7 +340,7 @@ tr:hover td{background:#f0f5fa}
       <g><line x1="30" y1="40" x2="30" y2="47" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="50" y1="38" x2="50" y2="46" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="70" y1="37" x2="70" y2="43" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/></g>
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -358,7 +358,7 @@ tr:hover td{background:#f0f5fa}
     </svg></div>
           </div>
         </div>
-        <div class="wt-card" style="background:#ecfeff;border:1.5px solid #06b6d440;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04);">
+        <div class="wt-card" style="background:#ecfeff;border:1px solid #06b6d440;box-shadow:none;">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#06b6d4"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -379,7 +379,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">38&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a5f3fc" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"><animate attributeName="d" dur="7.0s" begin="0.0s" repeatCount="indefinite"
             values="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27;
@@ -397,7 +397,7 @@ tr:hover td{background:#f0f5fa}
         <path d="M26,20 Q30,27 26,34" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.2"/>
         <path d="M8,27 L17,27" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="1.2"/></g>
       
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -415,7 +415,7 @@ tr:hover td{background:#f0f5fa}
     </svg></div>
           </div>
         </div>
-        <div class="wt-card" style="background:#e0f2fe;border:1.5px solid #0284c740;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04);">
+        <div class="wt-card" style="background:#e0f2fe;border:1px solid #0284c740;box-shadow:none;">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#0284c7"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -436,7 +436,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">38&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -451,7 +451,7 @@ tr:hover td{background:#f0f5fa}
       <g><line x1="30" y1="40" x2="30" y2="47" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="50" y1="38" x2="50" y2="46" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="70" y1="37" x2="70" y2="43" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/></g>
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -469,7 +469,7 @@ tr:hover td{background:#f0f5fa}
     </svg></div>
           </div>
         </div>
-        <div class="wt-card" style="background:#e0f2fe;border:1.5px solid #0284c740;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04);">
+        <div class="wt-card" style="background:#e0f2fe;border:1px solid #0284c740;box-shadow:none;">
           <div class="wt-ripple"><svg viewBox="0 0 100 16" preserveAspectRatio="none" style="width:100%;height:100%">
             <path fill="#0284c7"><animate attributeName="d" dur="4s" repeatCount="indefinite"
               values="M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,4 50,8 T100,8 L100,0 L0,0 Z;M0,8 Q25,12 50,8 T100,8 L100,0 L0,0 Z"/></path>
@@ -490,7 +490,7 @@ tr:hover td{background:#f0f5fa}
                 <div class="wt-site-f">37&deg;F</div>
               </div>
             </div>
-            <div class="wt-fish"><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
+            <div class="wt-fish"><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(-3deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -505,7 +505,7 @@ tr:hover td{background:#f0f5fa}
       <g><line x1="30" y1="40" x2="30" y2="47" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="50" y1="38" x2="50" y2="46" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
           <line x1="70" y1="37" x2="70" y2="43" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/></g>
-    </svg><svg viewBox="0 0 120 55" width="55" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
+    </svg><svg viewBox="0 0 120 55" width="42" style="filter:drop-shadow(0px 1px 2px rgba(0,0,0,0.12));transform:rotate(2deg);margin:1px 0">
       <path d="M8,27 C14,14 42,8 80,22 C90,25 100,22 100,22 L100,32 C100,32 90,29 80,32 C42,46 14,40 8,27"
         fill="#a8d4f0" stroke="rgba(0,0,0,0.15)" stroke-width="0.8"></path>
       
@@ -663,10 +663,10 @@ tr:hover td{background:#f0f5fa}
         <tr class="today">
           <td class="tdate">Today</td>
           <td class="tsrc">Obs</td>
-          <td class="">43.1<span class="csub">6.1&deg;C</span></td>
+          <td class="">43.1<span class="csub">6.2&deg;C</span></td>
           <td class="">41.8<span class="csub">5.4&deg;C</span></td>
           <td class="">40.2<span class="csub">4.6&deg;C</span></td>
-          <td>9.5</td>
+          <td>9.6</td>
           <td>3.111</td>
           <td>41.6</td>
           <td>80</td>
@@ -675,8 +675,8 @@ tr:hover td{background:#f0f5fa}
           <td class="tdate">Tue Feb 24</td>
           <td class="tsrc">Fcst</td>
           <td class="">--</td>
-          <td class="">44.1<span class="csub">6.7&deg;C</span></td>
-          <td class="">42.9<span class="csub">6.1&deg;C</span></td>
+          <td class="">44.2<span class="csub">6.8&deg;C</span></td>
+          <td class="">43.0<span class="csub">6.1&deg;C</span></td>
           <td>9.3 <span class="flow-pred">Pred</span></td>
           <td>3.104 <span class="flow-pred">Pred</span></td>
           <td>44.4</td>
@@ -764,15 +764,15 @@ const LB=['Fri Feb 20', 'Sat Feb 21', 'Sun Feb 22', 'Mon Feb 23', 'Tue Feb 24', 
 const TI=DT.indexOf(TDY);
 const AC=23.0, AF=AC*9/5+32;
 
-const MF=[null,null,null,43.0550,44.1298,40.0178,40.2976,41.2097,40.7133,40.0499,39.0253], MC=[null,null,null,6.1417,6.7388,4.4543,4.6098,5.1165,4.8407,4.4722,3.9029];
-const UF=[33.0564,34.7598,38.6533,40.2130,42.9210,37.1699,37.2321,38.0294,37.8086,37.0888,36.0198], UC=[0.5869,1.5332,3.6963,4.5628,6.0672,2.8721,2.9067,3.3496,3.2270,2.8271,2.2332];
-const OF=[36.9267,37.4540,40.7264,43.0550,null,null,null,null,null,null,null],   OC=[2.7371,3.0300,4.8480,6.1417,null,null,null,null,null,null,null];
+const MF=[null,null,null,43.1122,44.1615,40.0178,40.2976,41.2097,40.7133,40.0499,39.0253], MC=[null,null,null,6.1734,6.7564,4.4543,4.6098,5.1165,4.8407,4.4722,3.9029];
+const UF=[33.0564,34.7598,38.6533,40.2128,42.9528,37.1699,37.2321,38.0294,37.8086,37.0888,36.0198], UC=[0.5869,1.5332,3.6963,4.5627,6.0849,2.8721,2.9067,3.3496,3.2270,2.8271,2.2332];
+const OF=[36.9267,37.4540,40.7264,43.1122,null,null,null,null,null,null,null],   OC=[2.7371,3.0300,4.8480,6.1734,null,null,null,null,null,null,null];
 
 /* Flow chart data */
 const FLB=['Mon Feb 16', 'Tue Feb 17', 'Wed Feb 18', 'Thu Feb 19', 'Fri Feb 20', 'Sat Feb 21', 'Sun Feb 22', 'Mon Feb 23', 'Tue Feb 24', 'Wed Feb 25', 'Thu Feb 26', 'Fri Feb 27'];
 const FDT=['2026-02-16', '2026-02-17', '2026-02-18', '2026-02-19', '2026-02-20', '2026-02-21', '2026-02-22', '2026-02-23', '2026-02-24', '2026-02-25', '2026-02-26', '2026-02-27'];
-const FOQ=[10.9831,11.1720,10.5243,8.4640,11.0006,9.8024,10.0473,9.5491,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,9.5491,9.2700,8.4700,7.5800,7.1900];
-const FOG=[3.1438,3.1479,3.1334,3.0830,3.1441,3.1166,3.1224,3.1105,null,null,null,null], FPG=[null,null,null,null,null,null,null,3.1105,3.1037,3.0833,3.0589,3.0476];
+const FOQ=[10.9831,11.1720,10.5243,8.4640,11.0006,9.8024,10.0473,9.5607,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,9.5607,9.2700,8.4700,7.5800,7.1900];
+const FOG=[3.1438,3.1479,3.1334,3.0830,3.1441,3.1166,3.1224,3.1108,null,null,null,null], FPG=[null,null,null,null,null,null,null,3.1108,3.1037,3.0833,3.0589,3.0476];
 const FTI=FDT.indexOf(TDY);
 
 const MCL=['#94a3b8','#94a3b8','#94a3b8','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1'], UCL=['#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1'], OCL=['#0369a1','#0369a1','#0369a1','#0369a1','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8'];

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cottonwood Creek Water Temperature Forecast</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root{
+  --bg:#ffffff;--sf:#f7f8fa;--sf2:#eef1f5;--sf3:#e4e9f0;
+  --bd:#d0d7e0;--bdl:#b8c2cf;
+  --tx:#374151;--txd:#6b7b8d;--txb:#1a2332;
+  --ac:#1a73b5;--ac2:#2b8fd6;
+  --gn:#2e8b3d;--rd:#c62828;--or:#e65100;--yl:#f59e0b;--pu:#6d4c9e;
+  --f:'Source Sans 3',-apple-system,sans-serif;
+  --m:'IBM Plex Mono','Consolas',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);line-height:1.55}
+
+.hdr{background:linear-gradient(160deg,#1a5276,#1a73b5 50%,#2185c5);border-bottom:2px solid #1565a0;padding:2rem 2rem 1.7rem;position:relative}
+.hdr-in{max-width:1280px;margin:0 auto}
+.hdr h1{font-size:1.6rem;font-weight:700;color:#ffffff;letter-spacing:-.01em}
+.hdr .sub{color:rgba(255,255,255,.8);font-size:.9rem;margin-top:.1rem}
+.ri{display:flex;gap:1.4rem;margin-top:.55rem;font-size:.76rem;font-family:var(--m);flex-wrap:wrap}
+.ri span{color:rgba(255,255,255,.9);opacity:.9}
+
+.ab{border-radius:8px;padding:.8rem 1.3rem;margin:1.1rem auto 0;max-width:1280px;display:flex;align-items:center;gap:.65rem;font-weight:500;font-size:.88rem}
+.alert-active{background:#b91c1c;border:2px solid #991b1b;padding:1.4rem 1.8rem;border-radius:10px}
+.alert-active .adot{width:12px;height:12px;background:#ffffff;border-radius:50%;animation:bk 1.2s infinite}
+.alert-active .atx{color:#ffffff;font-size:1.25rem;font-weight:700;letter-spacing:.01em}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:.15}}
+.alert-ok{background:#f0fdf4;border:1px solid #86efac}
+.alert-ok .adot{width:9px;height:9px;background:var(--gn);border-radius:50%}
+.alert-ok .atx{color:var(--gn)}
+
+.ctr{max-width:1280px;margin:0 auto;padding:1rem 2rem 3rem}
+.cd{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1.3rem 1.5rem;margin-bottom:1.1rem}
+.cd h3{font-size:.78rem;font-weight:600;color:var(--txd);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media(max-width:960px){.g2{grid-template-columns:1fr}}
+
+.cw{position:relative;width:100%}
+.cw canvas{width:100%!important}
+
+.lg{display:flex;gap:1.1rem;flex-wrap:wrap;margin-bottom:.5rem;font-size:.76rem;color:var(--txd)}
+.lgi{display:flex;align-items:center;gap:.3rem}
+.ll{width:18px;height:3px;border-radius:2px}
+.ld{width:18px;height:0;border-top:2px dashed}
+
+.cls{display:flex;gap:0;margin:.25rem 0 .55rem;font-size:.68rem;color:var(--txd)}
+.clb{padding:.18rem .55rem;border-radius:3px;margin-right:2px;font-weight:600}
+
+.ws{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:.55rem}
+.wx-card{background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:.85rem .6rem;text-align:center;transition:border-color .2s,box-shadow .2s}
+.wx-card:hover{border-color:var(--bdl);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.wx-card.today-card{border-color:var(--ac);background:#eff8ff;box-shadow:0 2px 8px rgba(26,115,181,.1)}
+.wx-day{font-weight:600;font-size:.8rem;color:var(--txb)}
+.wx-date{font-size:.7rem;color:var(--txd);margin-bottom:.35rem}
+.wx-icon{font-size:1.9rem;line-height:1.2;margin:.15rem 0}
+.wx-cond{font-size:.72rem;color:var(--txd);margin-bottom:.25rem}
+.wx-temp{font-size:1.05rem;font-weight:600;color:var(--txb)}
+.wx-c{display:block;font-size:.74rem;font-weight:400;color:var(--txd)}
+.wx-det{font-size:.65rem;color:var(--txd);margin-top:.2rem;font-family:var(--m)}
+
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th{text-align:left;padding:.5rem .6rem;background:var(--sf2);color:var(--txd);font-weight:500;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--bd);white-space:nowrap}
+td{padding:.45rem .6rem;border-bottom:1px solid #e5e9ef;font-family:var(--m);font-size:.76rem;white-space:nowrap}
+.tdate{font-family:var(--f);font-weight:500;color:var(--txb)}
+.tsrc{font-family:var(--f);font-size:.68rem;color:var(--txd)}
+.csub{display:block;font-size:.62rem;color:var(--txd);line-height:1.1}
+tr.today td{background:#eff8ff}
+tr.today .tdate{color:var(--ac)}
+tr.forecast td{color:var(--ac2)}
+tr:hover td{background:#f0f5fa}
+.cell-alert{background:#fef2f2!important;color:var(--rd)!important;font-weight:600}
+.cell-warn{background:#fff7ed!important;color:var(--or)!important;font-weight:500}
+.cell-caution{background:#fffbeb!important;color:#b45309!important}
+.flow-pred{font-size:.6rem;color:var(--ac2);font-style:italic}
+
+.ft{text-align:center;font-size:.7rem;color:var(--txd);padding:1.4rem 2rem;border-top:1px solid var(--bd)}
+.model-note{font-size:.68rem;color:var(--txd);margin-top:.3rem;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="hdr"><div class="hdr-in">
+  <h1>Cottonwood Creek Water Temperature Forecast</h1>
+  <div class="sub">Monument, Oregon &mdash; MSWCD Gage Station</div>
+  <div class="ri">
+    <span>Forecast: Monday, February 23, 2026</span>
+    <span>Temp: Feb 20 &ndash; Mar 02, 2026</span>
+    <span>Flow: Feb 16 &ndash; Feb 27 (obs + predicted)</span>
+  </div>
+</div></div>
+
+<div class="ctr" style="padding-bottom:0">
+  <div class="ab alert-ok">
+    <div class="adot"></div>
+    <div class="atx">Water temperatures are below alert thresholds (23.0&deg;C / 73.4&deg;F).</div>
+  </div>
+</div>
+
+<div class="ctr">
+
+<!-- WATER TEMP CHART -->
+<div class="cd">
+  <h3>Water Temperature &mdash; 3-Day Observed + 7-Day Forecast</h3>
+  <div class="lg" style="font-size:.85rem;gap:1.5rem;margin-bottom:.7rem">
+    <div class="lgi"><div class="ll" style="background:#2e8b3d;width:24px;height:4px"></div> <strong style="color:#2e8b3d">Observed</strong></div>
+    <div class="lgi"><div class="ll" style="background:#1a73b5;width:24px;height:4px"></div> <strong style="color:#1a73b5">Predicted Mouth</strong></div>
+    <div class="lgi"><div class="ld" style="border-color:#6d4c9e;width:24px;border-top-width:3px"></div> <strong style="color:#6d4c9e">Predicted Upstream</strong></div>
+    <div class="lgi"><div class="ll" style="background:rgba(198,40,40,.35);height:1px"></div> Alert 23.0&deg;C</div>
+  </div>
+  <div class="cls">
+    <div class="clb" style="background:#e0f2fe;color:#0369a1">&lt;10&deg;C Cold</div>
+    <div class="clb" style="background:#dcfce7;color:#15803d">10-18&deg;C Normal</div>
+    <div class="clb" style="background:#fef9c3;color:#a16207">18-21&deg;C Warm</div>
+    <div class="clb" style="background:#ffedd5;color:#c2410c">21-23&deg;C High</div>
+    <div class="clb" style="background:#fee2e2;color:#b91c1c">&ge;23&deg;C Alert</div>
+  </div>
+  <div class="cw"><canvas id="tempChart" height="220"></canvas></div>
+</div>
+
+<!-- FLOW CHART (full width) -->
+<div class="cd">
+  <h3>Discharge (cfs) &amp; Gage Height (ft) &mdash; 7-Day Observed + 4-Day Predicted</h3>
+  <div class="lg">
+    <div class="lgi"><div class="ll" style="background:#1a73b5"></div> Observed Flow</div>
+    <div class="lgi"><div class="ld" style="border-color:#2b8fd6"></div> Predicted Flow</div>
+  </div>
+  <div class="model-note">Predicted flow uses the trained Random Forest model driven by weather forecast and SNOTEL data from Starr Ridge.</div>
+  <div class="cw"><canvas id="flowChart" height="180"></canvas></div>
+</div>
+
+<!-- WEATHER CARDS -->
+<div class="cd">
+  <h3>7-Day Weather Forecast &mdash; Monument, OR</h3>
+  <div class="ws">
+        <div class="wx-card today-card">
+          <div class="wx-day">Today</div>
+          <div class="wx-date">Feb 23</div>
+          <div class="wx-icon">&#x2601;</div>
+          <div class="wx-cond">Cloudy</div>
+          <div class="wx-temp">42&deg;F<span class="wx-c">5&deg;C</span></div>
+          <div class="wx-det">RH 80% &middot; DP 36&deg;F</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-day">Tue</div>
+          <div class="wx-date">Feb 24</div>
+          <div class="wx-icon">&#x1F327;</div>
+          <div class="wx-cond">Rain</div>
+          <div class="wx-temp">44&deg;F<span class="wx-c">7&deg;C</span></div>
+          <div class="wx-det">RH 89% &middot; DP 41&deg;F</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-day">Wed</div>
+          <div class="wx-date">Feb 25</div>
+          <div class="wx-icon">&#x2601;</div>
+          <div class="wx-cond">Cloudy</div>
+          <div class="wx-temp">38&deg;F<span class="wx-c">3&deg;C</span></div>
+          <div class="wx-det">RH 68% &middot; DP 28&deg;F</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-day">Thu</div>
+          <div class="wx-date">Feb 26</div>
+          <div class="wx-icon">&#x1F325;</div>
+          <div class="wx-cond">Cool</div>
+          <div class="wx-temp">38&deg;F<span class="wx-c">3&deg;C</span></div>
+          <div class="wx-det">RH 63% &middot; DP 25&deg;F</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-day">Fri</div>
+          <div class="wx-date">Feb 27</div>
+          <div class="wx-icon">&#x1F325;</div>
+          <div class="wx-cond">Cool</div>
+          <div class="wx-temp">40&deg;F<span class="wx-c">4&deg;C</span></div>
+          <div class="wx-det">RH 62% &middot; DP 27&deg;F</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-day">Sat</div>
+          <div class="wx-date">Feb 28</div>
+          <div class="wx-icon">&#x2601;</div>
+          <div class="wx-cond">Cloudy</div>
+          <div class="wx-temp">38&deg;F<span class="wx-c">4&deg;C</span></div>
+          <div class="wx-det">RH 68% &middot; DP 28&deg;F</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-day">Sun</div>
+          <div class="wx-date">Mar 01</div>
+          <div class="wx-icon">&#x1F325;</div>
+          <div class="wx-cond">Cool</div>
+          <div class="wx-temp">38&deg;F<span class="wx-c">3&deg;C</span></div>
+          <div class="wx-det">RH 64% &middot; DP 25&deg;F</div>
+        </div></div>
+</div>
+
+<!-- TABLE -->
+<div class="cd">
+  <h3>Daily Detail (&deg;F with &deg;C below)</h3>
+  <div style="overflow-x:auto">
+  <table>
+    <thead><tr>
+      <th>Date</th><th>Src</th><th>Obs Water</th><th>Pred Mouth</th><th>Pred Upstream</th>
+      <th>Flow (cfs)</th><th>Gage (ft)</th><th>Air (&deg;F)</th><th>RH (%)</th>
+    </tr></thead>
+    <tbody>
+        <tr class="observed">
+          <td class="tdate">Fri Feb 20</td>
+          <td class="tsrc">Obs</td>
+          <td class="">36.9<span class="csub">2.7&deg;C</span></td>
+          <td class="">35.4<span class="csub">1.9&deg;C</span></td>
+          <td class="">33.1<span class="csub">0.6&deg;C</span></td>
+          <td>11.0</td>
+          <td>3.144</td>
+          <td>31.5</td>
+          <td>72</td>
+        </tr>
+        <tr class="observed">
+          <td class="tdate">Sat Feb 21</td>
+          <td class="tsrc">Obs</td>
+          <td class="">37.5<span class="csub">3.0&deg;C</span></td>
+          <td class="">37.0<span class="csub">2.8&deg;C</span></td>
+          <td class="">34.8<span class="csub">1.5&deg;C</span></td>
+          <td>9.8</td>
+          <td>3.117</td>
+          <td>34.0</td>
+          <td>69</td>
+        </tr>
+        <tr class="observed">
+          <td class="tdate">Sun Feb 22</td>
+          <td class="tsrc">Obs</td>
+          <td class="">40.7<span class="csub">4.8&deg;C</span></td>
+          <td class="">40.8<span class="csub">4.9&deg;C</span></td>
+          <td class="">38.7<span class="csub">3.7&deg;C</span></td>
+          <td>10.0</td>
+          <td>3.122</td>
+          <td>45.8</td>
+          <td>53</td>
+        </tr>
+        <tr class="today">
+          <td class="tdate">Today</td>
+          <td class="tsrc">Obs</td>
+          <td class="">43.0<span class="csub">6.1&deg;C</span></td>
+          <td class="">41.8<span class="csub">5.4&deg;C</span></td>
+          <td class="">40.2<span class="csub">4.6&deg;C</span></td>
+          <td>9.5</td>
+          <td>3.110</td>
+          <td>41.6</td>
+          <td>80</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Tue Feb 24</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">44.1<span class="csub">6.7&deg;C</span></td>
+          <td class="">42.9<span class="csub">6.0&deg;C</span></td>
+          <td>9.3 <span class="flow-pred">Pred</span></td>
+          <td>3.104 <span class="flow-pred">Pred</span></td>
+          <td>44.4</td>
+          <td>89</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Wed Feb 25</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">40.0<span class="csub">4.5&deg;C</span></td>
+          <td class="">37.2<span class="csub">2.9&deg;C</span></td>
+          <td>8.5 <span class="flow-pred">Pred</span></td>
+          <td>3.083 <span class="flow-pred">Pred</span></td>
+          <td>37.9</td>
+          <td>68</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Thu Feb 26</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">40.3<span class="csub">4.6&deg;C</span></td>
+          <td class="">37.2<span class="csub">2.9&deg;C</span></td>
+          <td>7.6 <span class="flow-pred">Pred</span></td>
+          <td>3.059 <span class="flow-pred">Pred</span></td>
+          <td>37.9</td>
+          <td>63</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Fri Feb 27</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">41.2<span class="csub">5.1&deg;C</span></td>
+          <td class="">38.0<span class="csub">3.3&deg;C</span></td>
+          <td>7.2 <span class="flow-pred">Pred</span></td>
+          <td>3.048 <span class="flow-pred">Pred</span></td>
+          <td>39.5</td>
+          <td>62</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Sat Feb 28</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">40.7<span class="csub">4.8&deg;C</span></td>
+          <td class="">37.8<span class="csub">3.2&deg;C</span></td>
+          <td>7.2 <span class="flow-pred">Pred</span></td>
+          <td>3.048 <span class="flow-pred">Pred</span></td>
+          <td>38.3</td>
+          <td>68</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Sun Mar 01</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">40.0<span class="csub">4.5&deg;C</span></td>
+          <td class="">37.1<span class="csub">2.8&deg;C</span></td>
+          <td>6.9 <span class="flow-pred">Pred</span></td>
+          <td>3.040 <span class="flow-pred">Pred</span></td>
+          <td>37.5</td>
+          <td>64</td>
+        </tr>
+        <tr class="forecast">
+          <td class="tdate">Mon Mar 02</td>
+          <td class="tsrc">Fcst</td>
+          <td class="">--</td>
+          <td class="">39.0<span class="csub">3.9&deg;C</span></td>
+          <td class="">36.0<span class="csub">2.2&deg;C</span></td>
+          <td>6.7 <span class="flow-pred">Pred</span></td>
+          <td>3.031 <span class="flow-pred">Pred</span></td>
+          <td>36.1</td>
+          <td>60</td>
+        </tr></tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+
+<div class="ft">Cottonwood Creek Water Temperature Prediction System &bull; Generated 2026-02-23<br>
+Models: RF flow (Starr Ridge SNOTEL + Monument Wx) &rarr; Ridge water temperature</div>
+
+<script>
+Chart.register(ChartDataLabels);
+
+const LB=['Fri Feb 20', 'Sat Feb 21', 'Sun Feb 22', 'Mon Feb 23', 'Tue Feb 24', 'Wed Feb 25', 'Thu Feb 26', 'Fri Feb 27', 'Sat Feb 28', 'Sun Mar 01', 'Mon Mar 02'], DT=['2026-02-20', '2026-02-21', '2026-02-22', '2026-02-23', '2026-02-24', '2026-02-25', '2026-02-26', '2026-02-27', '2026-02-28', '2026-03-01', '2026-03-02'], TDY="2026-02-23";
+const TI=DT.indexOf(TDY);
+const AC=23.0, AF=AC*9/5+32;
+
+const MF=[null,null,null,42.9896,44.0935,40.0178,40.2976,41.2097,40.7133,40.0499,39.0253], MC=[null,null,null,6.1054,6.7186,4.4543,4.6098,5.1165,4.8407,4.4722,3.9029];
+const UF=[33.0564,34.7598,38.6533,40.2132,42.8847,37.1699,37.2321,38.0294,37.8086,37.0888,36.0198], UC=[0.5869,1.5332,3.6963,4.5629,6.0471,2.8721,2.9067,3.3496,3.2270,2.8271,2.2332];
+const OF=[36.9267,37.4540,40.7264,42.9896,null,null,null,null,null,null,null],   OC=[2.7371,3.0300,4.8480,6.1054,null,null,null,null,null,null,null];
+
+/* Flow chart data */
+const FLB=['Mon Feb 16', 'Tue Feb 17', 'Wed Feb 18', 'Thu Feb 19', 'Fri Feb 20', 'Sat Feb 21', 'Sun Feb 22', 'Mon Feb 23', 'Tue Feb 24', 'Wed Feb 25', 'Thu Feb 26', 'Fri Feb 27'];
+const FDT=['2026-02-16', '2026-02-17', '2026-02-18', '2026-02-19', '2026-02-20', '2026-02-21', '2026-02-22', '2026-02-23', '2026-02-24', '2026-02-25', '2026-02-26', '2026-02-27'];
+const FOQ=[10.9831,11.1720,10.5243,8.4640,11.0006,9.8024,10.0473,9.5359,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,9.5359,9.2700,8.4700,7.5800,7.1900];
+const FOG=[3.1438,3.1479,3.1334,3.0830,3.1441,3.1166,3.1224,3.1102,null,null,null,null], FPG=[null,null,null,null,null,null,null,3.1102,3.1037,3.0833,3.0589,3.0476];
+const FTI=FDT.indexOf(TDY);
+
+const MCL=['#94a3b8','#94a3b8','#94a3b8','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1'], UCL=['#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1','#0369a1'], OCL=['#0369a1','#0369a1','#0369a1','#0369a1','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8'];
+const MFL=['rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)'], UFL=['rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)'], OFL=['rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(3,105,161,0.2)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)','rgba(148,163,184,0.3)'];
+
+const CF={family:"'Source Sans 3'"};
+const MO={family:"'IBM Plex Mono'",size:10};
+const SD={grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#6b7b8d',font:{...MO}}};
+const TT={backgroundColor:'#ffffff',borderColor:'#d0d7e0',borderWidth:1,titleColor:'#1a2332',bodyColor:'#374151',titleFont:CF,bodyFont:{family:"'IBM Plex Mono'",size:11},padding:10,cornerRadius:6};
+
+function tzColor(c){
+  if(c===null||c===undefined)return null;
+  if(c>=23)return 'rgba(254,226,226,0.6)';
+  if(c>=21)return 'rgba(255,237,213,0.5)';
+  if(c>=18)return 'rgba(254,249,195,0.4)';
+  return null;
+}
+
+const ZONES={
+  id:'zones',
+  beforeDatasetsDraw(ch){
+    const c=ch.ctx, x=ch.scales.x, y=ch.scales.y;
+    if(!x||!y)return;
+    const n=LB.length;
+    c.save();
+    for(let i=0;i<n;i++){
+      const temps=[MC[i],UC[i],OC[i]].filter(v=>v!==null&&v!==undefined);
+      if(temps.length===0)continue;
+      const maxC=Math.max(...temps);
+      const col=tzColor(maxC);
+      if(!col)continue;
+      const cx=x.getPixelForValue(i);
+      let left,right;
+      if(i===0){ left=x.left; } else{ left=(x.getPixelForValue(i-1)+cx)/2; }
+      if(i===n-1){ right=x.right; } else{ right=(cx+x.getPixelForValue(i+1))/2; }
+      c.fillStyle=col;
+      c.fillRect(left,y.top,right-left,y.bottom-y.top);
+      if(maxC>=23){c.fillStyle='rgba(185,28,28,0.15)';c.fillRect(left,y.top,right-left,4);}
+    }
+    if(TI>=0){
+      const px=x.getPixelForValue(TI);
+      c.fillStyle='rgba(26,115,181,.04)';c.fillRect(px,y.top,x.right-px,y.bottom-y.top);
+      c.strokeStyle='rgba(26,115,181,.35)';c.lineWidth=1;c.setLineDash([5,4]);
+      c.beginPath();c.moveTo(px,y.top);c.lineTo(px,y.bottom);c.stroke();c.setLineDash([]);
+      c.fillStyle='rgba(26,115,181,.7)';c.font="500 10px 'Source Sans 3'";c.textAlign='center';
+      c.fillText('Today',px,y.top-4);
+    }
+    c.restore();
+  },
+  afterDatasetsDraw(ch){
+    const y=ch.scales.y,x=ch.scales.x;
+    if(!y)return;
+    const px=y.getPixelForValue(AF);
+    if(px<y.top||px>y.bottom)return;
+    const c=ch.ctx;c.save();
+    c.strokeStyle='rgba(185,28,28,.5)';c.lineWidth=1.5;c.setLineDash([6,4]);
+    c.beginPath();c.moveTo(x.left,px);c.lineTo(x.right,px);c.stroke();
+    c.fillStyle='rgba(185,28,28,.75)';c.font="600 11px 'Source Sans 3'";c.textAlign='right';
+    c.fillText(AC+'\u00b0C Alert',x.right,px-6);c.restore();
+  }
+};
+
+/* Today divider for flow chart */
+const FLOW_TODAY={
+  id:'flowToday',
+  beforeDatasetsDraw(ch){
+    if(FTI<0)return;
+    const c=ch.ctx, x=ch.scales.x, y=ch.scales.yF||ch.scales.y;
+    if(!x||!y)return;
+    c.save();
+    const px=x.getPixelForValue(FTI);
+    /* Forecast shading */
+    c.fillStyle='rgba(26,115,181,.03)';
+    c.fillRect(px,y.top,x.right-px,y.bottom-y.top);
+    /* Divider line */
+    c.strokeStyle='rgba(26,115,181,.35)';c.lineWidth=1;c.setLineDash([5,4]);
+    c.beginPath();c.moveTo(px,y.top);c.lineTo(px,y.bottom);c.stroke();c.setLineDash([]);
+    /* Label */
+    c.fillStyle='rgba(26,115,181,.7)';c.font="500 10px 'Source Sans 3'";c.textAlign='center';
+    c.fillText('Today',px,y.top-4);
+    /* Predicted zone label */
+    c.fillStyle='rgba(43,143,214,.5)';c.font="italic 10px 'Source Sans 3'";c.textAlign='left';
+    c.fillText('Predicted \u2192',px+6,y.top+14);
+    c.restore();
+  }
+};
+
+/* ========== WATER TEMP ========== */
+new Chart(document.getElementById('tempChart'),{
+  type:'line',
+  data:{
+    labels:LB,
+    datasets:[
+      {
+        label:'Observed (\u00b0F)',data:OF,
+        borderColor:'#2e8b3d',borderWidth:2.5,
+        pointRadius:7,pointHoverRadius:9,pointBackgroundColor:OFL,pointBorderColor:OCL,pointBorderWidth:2,
+        tension:.25,fill:false,spanGaps:false,
+        datalabels:{
+          display:c=>c.dataset.data[c.dataIndex]!==null,
+          formatter:(v,c)=>{const cv=OC[c.dataIndex];return cv!==null?cv.toFixed(1)+'\u00b0C':''},
+          color:'#15803d',anchor:'end',align:'top',offset:5,
+          font:{family:"'IBM Plex Mono'",size:10,weight:500},
+        },
+      },
+      {
+        label:'Pred Mouth (\u00b0F)',data:MF,
+        borderColor:'#1a73b5',borderWidth:2.5,
+        pointRadius:7,pointHoverRadius:9,pointBackgroundColor:MFL,pointBorderColor:MCL,pointBorderWidth:2,
+        tension:.25,fill:false,
+        datalabels:{
+          display:c=>{const i=c.dataIndex;if(c.dataset.data[i]===null)return false;if(i===TI)return false;return true;},
+          formatter:(v,c)=>{const cv=MC[c.dataIndex];return cv!==null?cv.toFixed(1)+'\u00b0C':''},
+          color:c=>MCL[c.dataIndex],anchor:'end',align:'top',offset:5,
+          font:{family:"'IBM Plex Mono'",size:10,weight:500},
+        },
+      },
+      {
+        label:'Pred Upstream (\u00b0F)',data:UF,
+        borderColor:'#6d4c9e',borderDash:[6,3],borderWidth:2,
+        pointRadius:6,pointHoverRadius:8,pointBackgroundColor:UFL,pointBorderColor:UCL,pointBorderWidth:2,
+        tension:.25,fill:false,
+        datalabels:{
+          display:c=>c.dataset.data[c.dataIndex]!==null,
+          formatter:(v,c)=>{const cv=UC[c.dataIndex];return cv!==null?cv.toFixed(1)+'\u00b0C':''},
+          color:c=>UCL[c.dataIndex],anchor:'start',align:'bottom',offset:5,
+          font:{family:"'IBM Plex Mono'",size:9,weight:500},
+        },
+      },
+    ],
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,animation:{duration:500},
+    layout:{padding:{top:28,bottom:8}},
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{...TT,
+        callbacks:{
+          label:c=>{const f=c.parsed.y;const cv=(f-32)*5/9;
+            return c.dataset.label+': '+f.toFixed(1)+'\u00b0F ('+cv.toFixed(1)+'\u00b0C)'},
+        }
+      },
+    },
+    scales:{
+      x:{...SD,ticks:{...SD.ticks,maxRotation:45}},
+      y:{...SD,position:'left',
+        title:{display:true,text:'Temperature (\u00b0F)',color:'#6b7b8d',font:CF},
+        afterDataLimits(ax){
+          /* Always show at least up to 25C (77F) for consistent scale */
+          const minF25C=77;
+          if(ax.max<minF25C)ax.max=minF25C;
+          const pad=(ax.max-ax.min)*0.1||3;
+          ax.min=ax.min-pad;ax.max=ax.max+pad;
+        },
+      },
+      yC:{
+        type:'linear',display:true,...SD,position:'right',grid:{drawOnChartArea:false},
+        title:{display:true,text:'Temperature (\u00b0C)',color:'#6b7b8d',font:CF},
+        afterDataLimits(ax){
+          const yF=ax.chart.scales.y;
+          if(yF){ax.min=(yF.min-32)*5/9;ax.max=(yF.max-32)*5/9}
+        },
+        ticks:{...SD.ticks,callback:v=>v.toFixed(0)+'\u00b0'},
+      },
+    },
+  },
+  plugins:[ZONES],
+});
+
+/* ========== FLOW / GAGE (7 obs + 4 pred) ========== */
+/* Stage-discharge rating curve: Q = 59.255*GH^2 - 327.47*GH + 454.84 */
+const ft2cfs=g=>Math.max(59.255*g*g-327.47*g+454.84,0);
+/* Inverse via quadratic formula: GH = (327.47+sqrt(327.47^2-4*59.255*(454.84-Q)))/(2*59.255) */
+const cfs2ft=q=>{const a=59.255,b=-327.47,c=454.84-q,disc=b*b-4*a*c;return disc>=0?((-b+Math.sqrt(disc))/(2*a)):0;};
+new Chart(document.getElementById('flowChart'),{
+  type:'line',
+  data:{
+    labels:FLB,
+    datasets:[
+      /* Observed flow (solid) */
+      {
+        label:'Observed Flow (cfs)',data:FOQ,
+        borderColor:'#1a73b5',backgroundColor:'rgba(26,115,181,.08)',
+        borderWidth:2.5,pointRadius:5,pointHoverRadius:7,
+        pointBackgroundColor:'#1a73b5',pointBorderWidth:2,
+        tension:.25,fill:true,yAxisID:'yF',spanGaps:false,
+        datalabels:{
+          display:c=>c.dataset.data[c.dataIndex]!==null&&c.dataIndex%2===0,
+          formatter:v=>v!==null?v.toFixed(0)+' cfs':'',
+          color:'#1a5276',anchor:'end',align:'top',offset:4,
+          font:{family:"'IBM Plex Mono'",size:9,weight:500},
+        },
+      },
+      /* Predicted flow (dashed) */
+      {
+        label:'Predicted Flow (cfs)',data:FPQ,
+        borderColor:'#2b8fd6',backgroundColor:'rgba(43,143,214,.06)',
+        borderDash:[6,3],borderWidth:2,pointRadius:5,pointHoverRadius:7,
+        pointBackgroundColor:'#2b8fd6',pointBorderWidth:2,pointStyle:'triangle',
+        tension:.25,fill:true,yAxisID:'yF',spanGaps:false,
+        datalabels:{
+          display:c=>c.dataset.data[c.dataIndex]!==null&&c.dataIndex%2===0,
+          formatter:v=>v!==null?v.toFixed(0)+' cfs':'',
+          color:'#2b8fd6',anchor:'end',align:'top',offset:4,
+          font:{family:"'IBM Plex Mono'",size:9,weight:500,style:'italic'},
+        },
+      },
+    ],
+  },
+  options:{
+    responsive:true,animation:{duration:500},
+    layout:{padding:{top:28}},
+    interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{...TT,
+      callbacks:{
+        label:c=>{const q=c.parsed.y;const gh=cfs2ft(q);
+          return c.dataset.label+': '+q.toFixed(1)+' cfs ('+gh.toFixed(2)+' ft)'},
+      }
+    }},
+    scales:{
+      x:{...SD,ticks:{...SD.ticks,maxRotation:45}},
+      yF:{...SD,position:'left',title:{display:true,text:'Flow (cfs)',color:'#6b7b8d',font:CF}},
+      yG:{type:'linear',display:true,...SD,position:'right',grid:{drawOnChartArea:false},
+        title:{display:true,text:'Gage Height (ft)',color:'#6b7b8d',font:CF},
+        afterDataLimits(ax){
+          const yF=ax.chart.scales.yF;
+          if(yF){ax.min=cfs2ft(yF.min);ax.max=cfs2ft(yF.max)}
+        },
+        ticks:{...SD.ticks,callback:v=>v.toFixed(2)},
+      },
+    },
+  },
+  plugins:[FLOW_TODAY],
+});
+</script>
+</body>
+</html>

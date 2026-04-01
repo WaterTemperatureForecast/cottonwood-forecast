@@ -149,12 +149,12 @@ tr:hover td{background:#f0f5fa}
             <div class="wt-sites">
               <div class="wt-site" style="border-right:1px solid rgba(0,0,0,0.08)">
                 <div class="wt-site-label">MOUTH</div>
-                <div class="wt-site-val" style="color:#0d9488">7.7&deg;C</div>
+                <div class="wt-site-val" style="color:#0d9488">7.8&deg;C</div>
                 <div class="wt-site-f">46&deg;F</div>
               </div>
               <div class="wt-site">
                 <div class="wt-site-label">UPSTREAM</div>
-                <div class="wt-site-val" style="color:#0e7490">6.5&deg;C</div>
+                <div class="wt-site-val" style="color:#0e7490">6.6&deg;C</div>
                 <div class="wt-site-f">44&deg;F</div>
               </div>
             </div>
@@ -700,11 +700,11 @@ tr:hover td{background:#f0f5fa}
           <td class="tdate">Today</td>
           <td class="tsrc">Obs</td>
           <td class="">--</td>
-          <td class="cell-cool">45.9<span class="csub">7.7&deg;C</span></td>
-          <td class="cell-cold">43.7<span class="csub">6.5&deg;C</span></td>
-          <td>8.6 <span class="flow-pred">Pred</span></td>
-          <td>3.088 <span class="flow-pred">Pred</span></td>
-          <td>42.7</td>
+          <td class="cell-cool">46.0<span class="csub">7.8&deg;C</span></td>
+          <td class="cell-cold">43.8<span class="csub">6.6&deg;C</span></td>
+          <td>8.5 <span class="flow-pred">Pred</span></td>
+          <td>3.084 <span class="flow-pred">Pred</span></td>
+          <td>43.0</td>
           <td>83</td>
         </tr>
         <tr class="forecast">
@@ -713,8 +713,8 @@ tr:hover td{background:#f0f5fa}
           <td class="">--</td>
           <td class="cell-cold">43.5<span class="csub">6.4&deg;C</span></td>
           <td class="cell-cold">40.3<span class="csub">4.6&deg;C</span></td>
-          <td>8.1 <span class="flow-pred">Pred</span></td>
-          <td>3.074 <span class="flow-pred">Pred</span></td>
+          <td>8.0 <span class="flow-pred">Pred</span></td>
+          <td>3.071 <span class="flow-pred">Pred</span></td>
           <td>37.7</td>
           <td>69</td>
         </tr>
@@ -725,7 +725,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-cold">44.5<span class="csub">6.9&deg;C</span></td>
           <td class="cell-cold">41.7<span class="csub">5.4&deg;C</span></td>
           <td>7.3 <span class="flow-pred">Pred</span></td>
-          <td>3.052 <span class="flow-pred">Pred</span></td>
+          <td>3.051 <span class="flow-pred">Pred</span></td>
           <td>42.2</td>
           <td>60</td>
         </tr>
@@ -744,7 +744,7 @@ tr:hover td{background:#f0f5fa}
           <td class="tdate">Sun Apr 05</td>
           <td class="tsrc">Fcst</td>
           <td class="">--</td>
-          <td class="cell-cool">49.8<span class="csub">9.9&deg;C</span></td>
+          <td class="cell-cool">49.9<span class="csub">9.9&deg;C</span></td>
           <td class="cell-cool">47.5<span class="csub">8.6&deg;C</span></td>
           <td>6.5 <span class="flow-pred">Pred</span></td>
           <td>3.025 <span class="flow-pred">Pred</span></td>
@@ -800,15 +800,15 @@ const LB=['Sun Mar 29', 'Mon Mar 30', 'Tue Mar 31', 'Wed Apr 01', 'Thu Apr 02', 
 const TI=DT.indexOf(TDY);
 const AC=23.0, AF=AC*9/5+32;
 
-const MF=[null,null,null,45.8609,43.4694,44.4827,47.0079,49.8431,51.5516,51.8636,50.3304], MC=[null,null,null,7.7005,6.3719,6.9348,8.3377,9.9128,10.8620,11.0353,10.1835];
-const UF=[43.4598,40.9332,41.0281,43.6590,40.3344,41.6921,44.4238,47.4747,48.9412,48.7802,46.6845], UC=[6.3665,4.9629,5.0156,6.4772,4.6302,5.3845,6.9021,8.5971,9.4118,9.3223,8.1580];
+const MF=[null,null,null,45.9919,43.4862,44.4980,47.0219,49.8571,51.5656,51.8636,50.3304], MC=[null,null,null,7.7733,6.3812,6.9434,8.3455,9.9206,10.8698,11.0353,10.1835];
+const UF=[43.4598,40.9332,41.0281,43.7929,40.3458,41.7019,44.4322,47.4832,48.9497,48.7802,46.6845], UC=[6.3665,4.9629,5.0156,6.5516,4.6365,5.3900,6.9068,8.6018,9.4165,9.3223,8.1580];
 const OF=[46.3016,null,null,null,null,null,null,null,null,null,null],   OC=[7.9453,null,null,null,null,null,null,null,null,null,null];
 
 /* Flow chart data */
 const FLB=['Wed Mar 25', 'Thu Mar 26', 'Fri Mar 27', 'Sat Mar 28', 'Sun Mar 29', 'Mon Mar 30', 'Tue Mar 31', 'Wed Apr 01', 'Thu Apr 02', 'Fri Apr 03', 'Sat Apr 04', 'Sun Apr 05'];
 const FDT=['2026-03-25', '2026-03-26', '2026-03-27', '2026-03-28', '2026-03-29', '2026-03-30', '2026-03-31', '2026-04-01', '2026-04-02', '2026-04-03', '2026-04-04', '2026-04-05'];
-const FOQ=[14.5900,14.2400,13.5500,12.6600,11.6100,null,null,null,null,null,null,null],  FPQ=[null,null,null,null,11.6100,8.8900,8.4000,8.6400,8.1300,7.3500,6.6000,6.4600];
-const FOG=[3.2168,3.2101,3.1970,3.1793,3.1573,null,null,null,null,null,null,null], FPG=[null,null,null,null,3.1573,3.0942,3.0813,3.0876,3.0742,3.0521,3.0293,3.0250];
+const FOQ=[14.5900,14.2400,13.5500,12.6600,11.6100,null,null,null,null,null,null,null],  FPQ=[null,null,null,null,11.6100,8.8900,8.4000,8.5100,8.0300,7.3000,6.6000,6.4600];
+const FOG=[3.2168,3.2101,3.1970,3.1793,3.1573,null,null,null,null,null,null,null], FPG=[null,null,null,null,3.1573,3.0942,3.0813,3.0843,3.0715,3.0508,3.0293,3.0250];
 const FTI=FDT.indexOf(TDY);
 
 const MCL=['#94a3b8','#94a3b8','#94a3b8','#0d9488','#0e7490','#0e7490','#0d9488','#0d9488','#0d9488','#15803d','#0d9488'], UCL=['#0e7490','#0e7490','#0e7490','#0e7490','#0e7490','#0e7490','#0e7490','#0d9488','#0d9488','#0d9488','#0d9488'], OCL=['#0d9488','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8'];

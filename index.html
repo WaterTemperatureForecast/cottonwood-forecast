@@ -699,11 +699,11 @@ tr:hover td{background:#f0f5fa}
         <tr class="today">
           <td class="tdate">Today</td>
           <td class="tsrc">Obs</td>
-          <td class="cell-cool">46.4<span class="csub">8.0&deg;C</span></td>
+          <td class="cell-cool">46.3<span class="csub">7.9&deg;C</span></td>
           <td class="cell-cool">45.4<span class="csub">7.5&deg;C</span></td>
           <td class="cell-cold">42.2<span class="csub">5.7&deg;C</span></td>
-          <td>16.2</td>
-          <td>3.246</td>
+          <td>16.3</td>
+          <td>3.248</td>
           <td>35.7</td>
           <td>71</td>
         </tr>
@@ -711,8 +711,8 @@ tr:hover td{background:#f0f5fa}
           <td class="tdate">Fri Apr 03</td>
           <td class="tsrc">Fcst</td>
           <td class="">--</td>
-          <td class="cell-cool">45.8<span class="csub">7.6&deg;C</span></td>
-          <td class="cell-cold">43.1<span class="csub">6.1&deg;C</span></td>
+          <td class="cell-cool">45.7<span class="csub">7.6&deg;C</span></td>
+          <td class="cell-cold">43.0<span class="csub">6.1&deg;C</span></td>
           <td>19.8 <span class="flow-pred">Pred</span></td>
           <td>3.305 <span class="flow-pred">Pred</span></td>
           <td>42.0</td>
@@ -800,15 +800,15 @@ const LB=['Mon Mar 30', 'Tue Mar 31', 'Wed Apr 01', 'Thu Apr 02', 'Fri Apr 03', 
 const TI=DT.indexOf(TDY);
 const AC=23.0, AF=AC*9/5+32;
 
-const MF=[null,null,null,46.3820,45.7573,47.0432,49.4083,51.4675,50.9989,49.2348,48.2979], MC=[null,null,null,7.9900,7.6429,8.3574,9.6713,10.8153,10.5550,9.5749,9.0544];
-const UF=[41.9974,43.5987,45.9949,42.1963,43.0599,44.5019,46.8931,48.8171,47.8853,45.2994,44.2309], UC=[5.5541,6.4437,7.7749,5.6646,6.1444,6.9455,8.2739,9.3428,8.8252,7.3885,6.7949];
-const OF=[48.9069,49.1131,49.1394,46.3820,null,null,null,null,null,null,null],   OC=[9.3927,9.5073,9.5219,7.9900,null,null,null,null,null,null,null];
+const MF=[null,null,null,46.3018,45.7128,47.0432,49.4083,51.4675,50.9989,49.2348,48.2979], MC=[null,null,null,7.9455,7.6182,8.3574,9.6713,10.8153,10.5550,9.5749,9.0544];
+const UF=[41.9974,43.5987,45.9949,42.1952,43.0154,44.5019,46.8931,48.8171,47.8853,45.2994,44.2309], UC=[5.5541,6.4437,7.7749,5.6640,6.1197,6.9455,8.2739,9.3428,8.8252,7.3885,6.7949];
+const OF=[48.9069,49.1131,49.1394,46.3018,null,null,null,null,null,null,null],   OC=[9.3927,9.5073,9.5219,7.9455,null,null,null,null,null,null,null];
 
 /* Flow chart data */
 const FLB=['Thu Mar 26', 'Fri Mar 27', 'Sat Mar 28', 'Sun Mar 29', 'Mon Mar 30', 'Tue Mar 31', 'Wed Apr 01', 'Thu Apr 02', 'Fri Apr 03', 'Sat Apr 04', 'Sun Apr 05', 'Mon Apr 06'];
 const FDT=['2026-03-26', '2026-03-27', '2026-03-28', '2026-03-29', '2026-03-30', '2026-03-31', '2026-04-01', '2026-04-02', '2026-04-03', '2026-04-04', '2026-04-05', '2026-04-06'];
-const FOQ=[14.2400,13.5500,12.6600,11.5400,10.2900,10.5200,12.6300,16.2100,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,16.2100,19.8000,15.8200,14.7500,12.6200];
-const FOG=[3.2101,3.1970,3.1793,3.1560,3.1281,3.1333,3.1787,3.2460,null,null,null,null], FPG=[null,null,null,null,null,null,null,3.2460,3.3051,3.2390,3.2198,3.1784];
+const FOQ=[14.2400,13.5500,12.6600,11.5400,10.2900,10.5200,12.6300,16.3100,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,16.3100,19.8000,15.8200,14.7500,12.6200];
+const FOG=[3.2101,3.1970,3.1793,3.1560,3.1281,3.1333,3.1787,3.2477,null,null,null,null], FPG=[null,null,null,null,null,null,null,3.2477,3.3051,3.2390,3.2198,3.1784];
 const FTI=FDT.indexOf(TDY);
 
 const MCL=['#94a3b8','#94a3b8','#94a3b8','#0d9488','#0d9488','#0d9488','#0d9488','#0d9488','#0d9488','#0d9488','#0d9488'], UCL=['#0e7490','#0e7490','#0d9488','#0e7490','#0e7490','#0e7490','#0d9488','#0d9488','#0d9488','#0d9488','#0e7490'], OCL=['#0d9488','#0d9488','#0d9488','#0d9488','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8'];

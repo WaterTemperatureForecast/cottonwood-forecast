@@ -737,11 +737,11 @@ tr:hover td{background:#f0f5fa}
         <tr class="today">
           <td class="tdate">Today</td>
           <td class="tsrc">Obs</td>
-          <td class="cell-optimal">55.2<span class="csub">12.9&deg;C</span></td>
+          <td class="cell-optimal">55.4<span class="csub">13.0&deg;C</span></td>
           <td class="cell-optimal">57.0<span class="csub">13.9&deg;C</span></td>
           <td class="cell-optimal">52.9<span class="csub">11.6&deg;C</span></td>
-          <td>2.3</td>
-          <td>2.820</td>
+          <td>2.4</td>
+          <td>2.821</td>
           <td>52.3</td>
           <td>76</td>
         </tr>
@@ -749,10 +749,10 @@ tr:hover td{background:#f0f5fa}
           <td class="tdate">Thu May 28</td>
           <td class="tsrc">Fcst</td>
           <td class="">--</td>
-          <td class="cell-optimal">59.3<span class="csub">15.2&deg;C</span></td>
-          <td class="cell-optimal">55.7<span class="csub">13.2&deg;C</span></td>
+          <td class="cell-optimal">59.4<span class="csub">15.2&deg;C</span></td>
+          <td class="cell-optimal">55.8<span class="csub">13.2&deg;C</span></td>
           <td>2.3 <span class="flow-pred">Pred</span></td>
-          <td>2.818 <span class="flow-pred">Pred</span></td>
+          <td>2.819 <span class="flow-pred">Pred</span></td>
           <td>63.2</td>
           <td>66</td>
         </tr>
@@ -763,7 +763,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-optimal">60.0<span class="csub">15.6&deg;C</span></td>
           <td class="cell-optimal">56.0<span class="csub">13.3&deg;C</span></td>
           <td>2.1 <span class="flow-pred">Pred</span></td>
-          <td>2.806 <span class="flow-pred">Pred</span></td>
+          <td>2.807 <span class="flow-pred">Pred</span></td>
           <td>56.9</td>
           <td>64</td>
         </tr>
@@ -774,7 +774,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-optimal">56.7<span class="csub">13.7&deg;C</span></td>
           <td class="cell-optimal">52.5<span class="csub">11.4&deg;C</span></td>
           <td>1.9 <span class="flow-pred">Pred</span></td>
-          <td>2.790 <span class="flow-pred">Pred</span></td>
+          <td>2.791 <span class="flow-pred">Pred</span></td>
           <td>51.9</td>
           <td>50</td>
         </tr>
@@ -785,7 +785,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-optimal">57.1<span class="csub">13.9&deg;C</span></td>
           <td class="cell-optimal">53.4<span class="csub">11.9&deg;C</span></td>
           <td>1.6 <span class="flow-pred">Pred</span></td>
-          <td>2.771 <span class="flow-pred">Pred</span></td>
+          <td>2.772 <span class="flow-pred">Pred</span></td>
           <td>54.7</td>
           <td>45</td>
         </tr>
@@ -796,7 +796,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-optimal">59.5<span class="csub">15.3&deg;C</span></td>
           <td class="cell-optimal">56.0<span class="csub">13.3&deg;C</span></td>
           <td>1.2 <span class="flow-pred">Pred</span></td>
-          <td>2.749 <span class="flow-pred">Pred</span></td>
+          <td>2.750 <span class="flow-pred">Pred</span></td>
           <td>59.9</td>
           <td>43</td>
         </tr>
@@ -807,7 +807,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-optimal">62.4<span class="csub">16.9&deg;C</span></td>
           <td class="cell-optimal">59.1<span class="csub">15.0&deg;C</span></td>
           <td>0.9 <span class="flow-pred">Pred</span></td>
-          <td>2.727 <span class="flow-pred">Pred</span></td>
+          <td>2.728 <span class="flow-pred">Pred</span></td>
           <td>66.0</td>
           <td>42</td>
         </tr>
@@ -818,7 +818,7 @@ tr:hover td{background:#f0f5fa}
           <td class="cell-optimal">62.7<span class="csub">17.0&deg;C</span></td>
           <td class="cell-optimal">59.2<span class="csub">15.1&deg;C</span></td>
           <td>0.7 <span class="flow-pred">Pred</span></td>
-          <td>2.704 <span class="flow-pred">Pred</span></td>
+          <td>2.705 <span class="flow-pred">Pred</span></td>
           <td>65.8</td>
           <td>44</td>
         </tr></tbody>
@@ -838,15 +838,15 @@ const LB=['Sun May 24', 'Mon May 25', 'Tue May 26', 'Wed May 27', 'Thu May 28', 
 const TI=DT.indexOf(TDY);
 const AC=23.0, AF=AC*9/5+32;
 
-const MF=[null,null,null,55.2313,59.3341,59.9925,56.6749,57.0768,59.5158,62.3605,62.6626], MC=[null,null,null,12.9062,15.1856,15.5514,13.7083,13.9316,15.2866,16.8670,17.0348];
-const UF=[60.3687,58.4102,54.1462,52.8923,55.7218,56.0182,52.5119,53.3644,55.9531,59.0590,59.2159], UC=[15.7604,14.6723,12.3034,11.6068,13.1788,13.3435,11.3955,11.8691,13.3073,15.0328,15.1199];
-const OF=[63.6224,62.6306,57.2938,55.2313,null,null,null,null,null,null,null],   OC=[17.5680,17.0170,14.0521,12.9062,null,null,null,null,null,null,null];
+const MF=[null,null,null,55.3931,59.4234,59.9916,56.6740,57.0760,59.5149,62.3598,62.6617], MC=[null,null,null,12.9962,15.2352,15.5509,13.7078,13.9311,15.2861,16.8665,17.0343];
+const UF=[60.3687,58.4102,54.1462,52.8918,55.8111,56.0174,52.5111,53.3636,55.9522,59.0583,59.2150], UC=[15.7604,14.6723,12.3034,11.6066,13.2284,13.3430,11.3950,11.8686,13.3068,15.0324,15.1195];
+const OF=[63.6224,62.6306,57.2938,55.3931,null,null,null,null,null,null,null],   OC=[17.5680,17.0170,14.0521,12.9962,null,null,null,null,null,null,null];
 
 /* Flow chart data */
 const FLB=['Wed May 20', 'Thu May 21', 'Fri May 22', 'Sat May 23', 'Sun May 24', 'Mon May 25', 'Tue May 26', 'Wed May 27', 'Thu May 28', 'Fri May 29', 'Sat May 30', 'Sun May 31'];
 const FDT=['2026-05-20', '2026-05-21', '2026-05-22', '2026-05-23', '2026-05-24', '2026-05-25', '2026-05-26', '2026-05-27', '2026-05-28', '2026-05-29', '2026-05-30', '2026-05-31'];
-const FOQ=[3.3100,2.1300,1.7800,1.2500,1.0000,0.6300,1.0100,2.3400,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,2.3400,2.3200,2.1200,1.8900,1.6400];
-const FOG=[2.8727,2.8062,2.7821,2.7553,2.7322,2.6917,2.7336,2.8198,null,null,null,null], FPG=[null,null,null,null,null,null,null,2.8198,2.8184,2.8059,2.7900,2.7711];
+const FOQ=[3.3100,2.1300,1.7800,1.2500,1.0000,0.6300,1.0100,2.3500,null,null,null,null],  FPQ=[null,null,null,null,null,null,null,2.3500,2.3300,2.1400,1.9000,1.6500];
+const FOG=[2.8727,2.8062,2.7821,2.7553,2.7322,2.6917,2.7336,2.8206,null,null,null,null], FPG=[null,null,null,null,null,null,null,2.8206,2.8192,2.8067,2.7908,2.7719];
 const FTI=FDT.indexOf(TDY);
 
 const MCL=['#94a3b8','#94a3b8','#94a3b8','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d'], UCL=['#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d','#15803d'], OCL=['#15803d','#15803d','#15803d','#15803d','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8'];
